@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './stylesheets/main.scss';
 import {appConfig} from './constants';
 import {UserSession} from 'blockstack';
-import { Button } from 'react-bulma-components';
+import {Button} from 'react-bulma-components';
 
 class App extends Component {
     state = {
@@ -10,7 +10,7 @@ class App extends Component {
     };
 
     componentDidMount = async () => {
-        const { userSession } = this.state;
+        const {userSession} = this.state;
         if (!userSession.isUserSignedIn() && userSession.isSignInPending()) {
             const userData = await userSession.handlePendingSignIn();
             if (!userData.username) {
@@ -25,6 +25,12 @@ class App extends Component {
         userSession.redirectToSignIn();
     };
 
+    handleSignOut = () => {
+        const {userSession} = this.state;
+        userSession.signUserOut();
+        window.location = '/';
+    };
+
     render() {
         console.log(this.state.userSession);
         const {userSession} = this.state;
@@ -32,7 +38,7 @@ class App extends Component {
             <div className="App">
                 {
                     userSession.isUserSignedIn() ?
-                        <Button color="primary">
+                        <Button color="primary" onClick={this.handleSignOut}>
                             Sign out
                         </Button> :
                         <Button color="primary" onClick={this.handleSignIn}>
