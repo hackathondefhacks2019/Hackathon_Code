@@ -1,0 +1,294 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .collapsible {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #555;
+        }
+
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f1f1f1;
+            text-indent: 40px;
+        }
+
+
+        .tab {
+            margin-left: 40px;
+            margin-right: 40px;
+            text-indent: 40px;
+        }
+
+        .column {
+            float: left;
+            width: 50%;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        .collapsible:after {
+            content: '\02795'; /* Unicode character for "plus" sign (+) */
+            font-size: 13px;
+            color: white;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active:after {
+            content: "\2796"; /* Unicode character for "minus" sign (-) */
+        }
+
+        /* Slideshow container */
+        .slideshow-container {
+            max-width: 1000px;
+            position: relative;
+            margin: auto;
+        }
+
+        /* Hide the images by default */
+        .mySlides {
+            display: none;
+        }
+
+        /* Next & previous buttons */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Caption text */
+        .text {
+            color: #000000;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+            font-family: 'Franklin Gothic Medium';
+        }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #000000;
+            font-size: 12px;
+            padding: 12px 12px;
+            position: absolute;
+            top: 100;
+            opacity: 60%;
+        }
+
+        /* The dots/bullets/indicators */
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active, .dot:hover {
+            background-color: #717171;
+        }
+
+        /* Fading animation */
+        .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 1.5s;
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @-webkit-keyframes fade {
+            from {
+                opacity: .4
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+    </style>
+    <title>The HTML5 Herald</title>
+    <meta name="description" content="The HTML5 Herald">
+    <meta name="author" content="SitePoint">
+    <link rel="stylesheet" href="css/styles.css?v=1.0">
+</head>
+<body>
+<script src="js/scripts.js"></script>
+<div class="columns">
+    <div class="column is-two-fifths">
+        <div class="slideshow-container" style="margin-right:20px; margin-left:20px">
+            <!-- Full-width images with number and caption text -->
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                <img src="images/pic1.png" style="width:100%;height:500px">
+                <h4 class="text" style="color:blanchedalmond">Credit Horizon uses BlockStack to implement blockchain for maximum security,
+                    transparancy, and trust between the company and the client.
+                </h4>
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 3</div>
+                <img src="images/pic2.jpg" style="width:100%;height:500px">
+                <h4 class="text" style="color:blanchedalmond">Using adaptive algorithms, Credit Horizon aim to overcome
+                    current barriers faced by people who may not have access to means of developing a credit score
+                    through traditional means
+                </h4>
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                <img src="images/pic3.jpg" style="width:100%;height:500px">
+                <h4 class="text" style="color:blanchedalmond">Using the latest technology avaliable, Credit Horizon not only provides a reliable
+                    creidt score, but also provides a prediction for the future
+                </h4>
+            </div>
+            <!-- Next and previous buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <br>
+        <!-- The dots/circles -->
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </div>
+    <div class="column is-two-fifths">
+        <button class="collapsible">Features</button>
+        <div class="content">
+            <p class="tab">Credit Horizon combines the cutting edge technology of artificial intelligence and security
+                of blockchain to create a unique algorithm designed to provide the most accurate credit score possible
+                to our users. Unlike traditional credit scores, which are both unclear and fixed, putting a large
+                population at a major disadvantage, our company uses a revolutionary new method that not only looks at a
+                users past but takes into account the context and potential of the user. Included in this is a modern
+                approach to starting credit scores which gives new users a six-month trial period from which the initial
+                credit score is determined as well as a formula that calculates the credit score by assigning weights to
+                different categories specific to each person. By including such features, we hope to pave the way for a
+                secure, technological-centered, and inclusive future.
+            </p>
+        </div>
+        <button class="collapsible">Why BlockStack?</button>
+        <div class="content">
+            <p class="tab">Blockstack is a full-stack decentralized computing network that enables a new generation of
+                applications where developers and users can interact fairly securely. Blockstack achieves the purpose of
+                suppressing fraud and authenticating the user. Blockstack uses a dedicated Blockchain, designed for
+                decentralized apps, to provide Blockstack IDs and execute smart-contracts</p>
+        </div>
+        <button class="collapsible">Why Gaia?</button>
+        <div class="content">
+            <p class="tab">To make sure that the user data is stored in a secure location, we implemented Gaia through
+                Blockstack. Gaia is a decentralized high-performance storage system. It works by hosting data in one or
+                more existing storage systems of the users choice. Access control in a Gaia storage hub is performed on
+                a per-address basis.</p>
+        </div>
+
+    </div>
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        // Next/previous controls
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        // Thumbnail image controls
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = slides.length
+            }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+        }
+    </script>
+</div>
+</body>
+</html>

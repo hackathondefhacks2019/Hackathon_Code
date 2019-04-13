@@ -46,6 +46,11 @@ class AdminTransactions extends Component {
             />
           </Content>
         </Card.Content>
+        <Card.Content>
+          <Content>
+            <h3><a href="/score.html">Go to my credit score page</a></h3>
+          </Content>
+        </Card.Content>
       </Card>
     )
   }

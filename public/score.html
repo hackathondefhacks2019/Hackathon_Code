@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            background-color: beige
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                zoomEnabled: true,
+                title: {
+                    text: "Credit Score Over Time"
+                },
+                axisX: {
+                    title: "Time (days)",
+                    minimum: 0,
+                    maximum: 150
+                },
+                axisY: {
+                    title: "Credit",
+                    minimum: 0,
+                    maximum: 10,
+                    stripLines: [
+                        {
+                            startValue: 6.45,
+                            endValue: 6.55,
+                            color: "#000000"
+                        }
+                    ]
+                },
+                data: [{
+                    type: "scatter",
+                    toolTipContent: "<b>Days: </b>{x}<br/><b>Score: </b>{y}",
+                    dataPoints: [
+                        {x: 5, y: 3.5},
+                        {x: 9, y: 4.5},
+                        {x: 8, y: 4.5},
+                        {x: 25, y: 7},
+                        {x: 10, y: 6.5},
+                        {x: 35, y: 8.5},
+                        {x: 20, y: 9.0},
+                        {x: 41, y: 5.25},
+                        {x: 25, y: 6.10},
+                        {x: 40, y: 6.15},
+                        {x: 50, y: 4.05},
+                        {x: 30, y: 6.8},
+                        {x: 50, y: 3.22},
+                        {x: 62, y: 4.4},
+                        {x: 25, y: 5.450},
+                        {x: 35, y: 7.600},
+                        {x: 65, y: 9.300},
+                        {x: 70, y: 4.620},
+                        {x: 75, y: 9.700},
+                        {x: 83, y: 5.800},
+                        {x: 90, y: 6.000, indexLabel: "Current", markerColor: "red", markerType: "triangle"},
+                        {x: 05, y: 6.200},
+                        {x: 15, y: 8.960},
+                        {x: 25, y: 4.990}
+                    ]
+                }]
+            });
+            chart.render();
+        }
+    </script>
+    <title>Calculate Your Score!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<div class="box cta" style="background-color:blanchedalmond">
+    <div class="has-text-centered">
+        <span style="font-size:15pt"><strong>Credit Grade: A-</strong></span>
+    </div>
+</div>
+<div id="chartContainer" style="width: 100%; height: 300px;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<div class="columns">
+    <div class="column">
+        <div class="w3-bar">
+            <div style="margin:20px; font-family: 'Georgia, 'Times New Roman', Times, serif;">
+                <button onclick="document.getElementById('id01').style.display='block'" style="height:100px;width:200px"
+                        class="w3-button w3-bar-item w3-border-red w3-round-large w3-blue">Payment History
+                </button>
+                <div id="id01" class="w3-modal">
+                    <div class="w3-modal-content w3-animate-opacity">
+                        <header class="w3-container2 w3-teal">
+                            <span onclick="document.getElementById('id01').style.display='none'"
+                                  class="w3-button w3-display-topright">&times;</span>
+                            <h2>Recent Payment Transactions</h2>
+                        </header>
+                        <div class="w3-container2">
+                            <p><strong>3/17/19</strong> 5 cabbages</p>
+                            <p><strong>2/12/18</strong> 7 pandas</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div style="margin:20px; font-family: 'Georgia, 'Times New Roman', Times, serif;">
+            <button onclick="document.getElementById('id02').style.display='block'" style="height:100px;width:200px"
+                    class="w3-button w3-bar w3-border-red w3-round-large w3-blue">Debt
+            </button>
+            <div id="id02" class=" w3-bar-item w3-modal">
+                <div class="w3-modal-content  w3-bar-item w3-animate-opacity w3-leftbar">
+                    <header class="w3-container2 w3-bar-item w3-teal">
+                  <span onclick="document.getElementById('id02').style.display='none'"
+                        class="w3-button w3-bar-item w3-display-topright">&times;</span>
+                        <h2>Debt</h2>
+                    </header>
+                    <div class="w3-container2">
+                        <div><strong>4/13/2019</strong> Paid off _____</div>
+                        <div><strong>4/11/2019</strong> Paid off _____</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div style="margin:20px; font-family: 'Georgia, 'Times New Roman', Times, serif;">
+            <button onclick="document.getElementById('id03').style.display='block'" style="height:100px;width:200px"
+                    class="w3-button w3-bar-item w3-border-red w3-round-large w3-blue">Time in File
+            </button>
+            <div id="id03" class="w3-modal">
+                <div class="w3-modal-content w3-bar-item w3-animate-opacity w3-leftbar">
+                    <header class="w3-container w3-teal">
+                    <span onclick="document.getElementById('id03').style.display='none'"
+                          class="w3-button  w3-bar-item w3-display-topright">&times;</span>
+                        <h2>Time in File</h2>
+                    </header>
+                    <div class="w3-container2  w3-bar-item">
+                        <p><strong>Since 2/12/15</strong></p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div style="margin:20px; font-family: 'Georgia, 'Times New Roman', Times, serif;">
+            <div>
+                <button onclick="document.getElementById('id04').style.display='block'" style="height:100px;width:200px"
+                        class="w3-button w3-bar-item w3-border-red w3-round-large w3-blue">Account Diversity
+                </button>
+                <div id="id04" class="w3-modal">
+                    <div class="w3-modal-content w3-bar-item w3-animate-opacity">
+                        <header class="w3-container2 w3-teal">
+                        <span onclick="document.getElementById('id04').style.display='none'"
+                              class="w3-button  w3-bar-item w3-display-topright">&times;</span>
+                            <h2>Current Accounts</h2>
+                        </header>
+                        <div class="w3-container2  w3-bar-item">
+                            <div><strong>Since 3/17/17</strong> Bank of America Credit Card</div>
+                            <div><strong>Since 1/12/00</strong> Honda 2000 Civic Auto Loan</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
