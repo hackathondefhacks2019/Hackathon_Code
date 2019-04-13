@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import AdminUsernameTransactionsRoute from './transactions/routes';
+import AdminUsername from '../_username'
 
 class AdminUsernameRoute extends Component {
   static propTypes = {
@@ -16,7 +17,7 @@ class AdminUsernameRoute extends Component {
         <Route
           exact
           path={this.props.match.url}
-          render={() => <div>Hello {username}</div>}
+          render={() => <AdminUsername username={username} />}
         />
         <Route
           path={`${this.props.match.url}/transactions`}
