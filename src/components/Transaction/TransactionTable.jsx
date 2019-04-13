@@ -6,8 +6,6 @@ import { withRouter } from 'react-router-dom';
 
 class TransactionsTable extends Component {
   static propTypes = {
-    userSession: PropTypes.object.isRequired,
-    username: PropTypes.string.isRequired,
     transactions: PropTypes.array.isRequired
   };
 

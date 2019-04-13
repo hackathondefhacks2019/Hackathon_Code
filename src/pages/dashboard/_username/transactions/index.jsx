@@ -36,7 +36,6 @@ class AdminTransactions extends Component {
 
   render() {
     const { transactions } = this.state;
-    const { username, userSession } = this.context.state;
 
     return (
       <Card>
@@ -44,8 +43,6 @@ class AdminTransactions extends Component {
           <Content>
             <TransactionsTable
               transactions={transactions}
-              username={username}
-              userSession={userSession}
             />
           </Content>
         </Card.Content>
