@@ -10,5 +10,4 @@ public class TransactionNode {
         public double getAmount() { return this.amount; }
 
         public int getDate() { return this.date; }
-    }
 }

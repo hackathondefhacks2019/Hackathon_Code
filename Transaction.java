@@ -47,4 +47,9 @@ public class Transaction{
     public void setDescription(String details){
         description = details != null? details : "";
     }
+
+    public String toString(){
+        return tranAmt + " " + tranDate.getYear()+ "/" +
+                tranDate.getMonth() + "/" + tranDate.getDay() + "\n";
+    }
 }

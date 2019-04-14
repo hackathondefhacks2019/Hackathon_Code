@@ -9,7 +9,7 @@ public class User {
     private String lastName;
     private double accountNum;
     private int cvv;
-    private Owe owe;
+    //private Owe owe;
     public  ArrayList<Transaction> userTransactionHist;
 
     public User(){
@@ -19,18 +19,18 @@ public class User {
         lastName = "Smith";
         accountNum = 1000001;
         cvv = 123;
-        owe = new Owe(0.00,new Date(2015,1,1));
+        //owe = new Owe(0.00,new Date(2015,1,1));
         userTransactionHist = new ArrayList<Transaction>();
     }
 
-    public User(Date start, Date end, String first, String last, double acc, int cv, Owe value){
+    public User(Date start, Date end, String first, String last, double acc, int cv){
         startDate = new Date(start.getYear(),start.getMonth(), start.getDay());
         endDate = new Date(end.getYear(), end.getMonth(), end.getDay());
         firstName = first;
         lastName = last;
         accountNum = acc;
         cvv = cv;
-        owe = new Owe(value.getOwedAmt(), value.getOweAmtSince());
+        //owe = new Owe(value.getOwedAmt(), value.getOweAmtSince());
         userTransactionHist = new ArrayList<Transaction>();
     }
 
@@ -42,11 +42,11 @@ public class User {
         //the amount goes from positive to negatiev or
         //vice versa
         //in order
-        owe.updateValues(transactionVal.getTranAmt(), transactionVal.getTranDate());
+        //owe.updateValues(transactionVal.getTranAmt(), transactionVal.getTranDate());
 
         try{
             FileWriter fileWriter = new FileWriter(fileName, true);
-            fileWriter.write(owe.toString());
+            fileWriter.write(transactionVal.toString());
             //System.out.println(owe.toString());
             fileWriter.close();
         } catch (Exception e){
@@ -59,11 +59,12 @@ public class User {
 
     //add the transaction object in parts: date, amount, details
     public boolean addTransaction(Date transactionDate, double transactionAmt, String details, String fileName){
-        owe.updateAmt(transactionAmt);
+        //owe.updateAmt(transactionAmt);
         //System.out.println(owe.toString());
         try{
             FileWriter fileWriter = new FileWriter(fileName, true);
-            fileWriter.write(owe.toString());
+            fileWriter.write(transactionAmt + " " + transactionDate.getYear()+ "/" +
+                    transactionDate.getMonth() + "/" + transactionDate.getDay() );
             //System.out.println(owe.toString());
             fileWriter.close();
         } catch (Exception e){
@@ -74,13 +75,13 @@ public class User {
         return userTransactionHist.add(new Transaction(transactionDate, transactionAmt, details));
     }
 
-    public double getOweAmt(){
+    /*public double getOweAmt(){
         return owe.getOwedAmt();
-    }
+    }*/
 
     //owe class that keeps track of the owed amount and the date since the
     //owed amount started accumulating
-    public class Owe {
+    /*public class Owe {
         double owedAmt;
         Date oweAmtSince;
 
@@ -125,7 +126,7 @@ public class User {
             temp += oweAmtSince.getYear()+ "/" + oweAmtSince.getMonth() + "/" + oweAmtSince.getDay();
             return temp;
         }
-    }
+    }*/
 
 
 

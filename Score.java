@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 import java.util.Date;
+Import java.io.FileReader;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
 
 public class Score {
     private double score;
@@ -192,13 +196,40 @@ public class Score {
 
     // read file
     public void read(File file) throws FileNotFoundException {
-
-        Scanner scn = new Scanner(file);
         ArrayList<TransactionNode> list = new ArrayList<>();
 
-        while (scn.hasNextLine()) {
-            TransactionNode temp = parse(scn.nextLine());
-            list.add(temp);
+        try{
+            Object obj = new JSONParser().parse(new FileReader("transaction_data.json"));
+
+            JSONObject fileRead = (JSONObject) obj;
+
+            JSONArray tranData = (JSONArray) fileRead.get("transactions");
+
+            Iterator itr1 = fileRead.iterator();
+            while(itr1.hasNext()){
+                Iterator itr1 =  ((Map) itr2.next()).entrySet().iterator();
+                String temp = "";
+                int count = 0;
+                while(itr1.hasNext()){
+                    Map.Entry pair = itr1.next();
+                    count++;
+                    if(count != 2 ){
+                        temp += pair.getValue() + " ";
+                        count++;
+                    } else if (count == 2){
+                        temp += pair.getValue();
+                        count = 0;
+                        TransactionNode parsedData = parse(temp);
+                        System.out.println(temp);
+                        list.add(parsedData);
+                        temp = "";
+                    }
+                }
+            }
+
+        } catch (Exception e){
+            System.out.println("Error while reading");
+            System.exit(0);
         }
 
         this.list = list;
