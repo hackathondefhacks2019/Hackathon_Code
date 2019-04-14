@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class User {
 
@@ -24,7 +25,7 @@ public class User {
 
     public User(Date start, Date end, String first, String last, double acc, int cv, Owe value){
         startDate = new Date(start.getYear(),start.getMonth(), start.getDay());
-        endDate = new Date(end);
+        endDate = new Date(end.getYear(), end.getMonth(), end.getDay());
         firstName = first;
         lastName = last;
         accountNum = acc;
@@ -34,32 +35,47 @@ public class User {
     }
 
     //add transaction object
-    public boolean addTransaction(Transaction transactionVal){
-        //owe += transactionVal.getTranAmt();
-        double temp = transactionVal.getTranAmt();
-        double curOweAmt = owe.getOwedAmt();
+    public boolean addTransaction(Transaction transactionVal, String fileName){
 
         //updates owe with amt
         //the date of owe object gets updated only if
         //the amount goes from positive to negatiev or
         //vice versa
         //in order
-        if (temp + curOweAmt > 0)
-            owe.updateAmt(transactionVal.getTranAmt());
-        else
-            owe.updateAmt(transactionVal.getTranAmt(), transactionVal.getTranDate());
+        owe.updateValues(transactionVal.getTranAmt(), transactionVal.getTranDate());
+
+        try{
+            FileWriter fileWriter = new FileWriter(fileName, true);
+            fileWriter.write(owe.toString());
+            //System.out.println(owe.toString());
+            fileWriter.close();
+        } catch (Exception e){
+            System.out.println("Error found while writing to txt file.");
+            System.exit(0);
+        }
 
         return userTransactionHist.add(transactionVal);
     }
 
     //add the transaction object in parts: date, amount, details
-    public boolean addTransaction(Date transactionDate, double transactionAmt, String details){
+    public boolean addTransaction(Date transactionDate, double transactionAmt, String details, String fileName){
         owe.updateAmt(transactionAmt);
-        return userTransactionHist.add(transactionDate, transactionAmt, details);
+        //System.out.println(owe.toString());
+        try{
+            FileWriter fileWriter = new FileWriter(fileName, true);
+            fileWriter.write(owe.toString());
+            //System.out.println(owe.toString());
+            fileWriter.close();
+        } catch (Exception e){
+            System.out.println("Error found while writing to txt file.");
+            System.exit(0);
+        }
+
+        return userTransactionHist.add(new Transaction(transactionDate, transactionAmt, details));
     }
 
     public double getOweAmt(){
-        return Owe.getOwedAmt();
+        return owe.getOwedAmt();
     }
 
     //owe class that keeps track of the owed amount and the date since the
@@ -75,7 +91,7 @@ public class User {
 
         public Owe(double oweValue, Date sinceDate){
             owedAmt = oweValue;
-            oweAmtSince = new Date(sinceDate);
+            oweAmtSince = new Date(sinceDate.getYear(), sinceDate.getMonth(), sinceDate.getDay());
         }
 
         public double getOwedAmt(){
@@ -83,7 +99,7 @@ public class User {
         }
 
         public Date getOweAmtSince(){
-            return new Date(oweAmtSince);
+            return new Date(oweAmtSince.getYear(), oweAmtSince.getMonth(), oweAmtSince.getDay());
         }
 
         public void setOwedAmt(double value){
@@ -91,7 +107,7 @@ public class User {
         }
 
         public void setOweAmtSince(Date value){
-            oweAmtSince= new Date(value);
+            oweAmtSince= new Date(value.getYear(), value.getMonth(), value.getDay());
         }
 
         public void updateAmt(double value){
@@ -100,7 +116,14 @@ public class User {
 
         public void updateValues(double amt, Date owedDate){
             owedAmt += amt;
-            oweAmtSince = new Date(owedDate);
+            oweAmtSince = new Date(owedDate.getYear(), owedDate.getMonth(), owedDate.getDay());
+        }
+
+        public String toString(){
+            String temp = "";
+            temp += owedAmt + " ";
+            temp += oweAmtSince.getYear()+ "/" + oweAmtSince.getMonth() + "/" + oweAmtSince.getDay();
+            return temp;
         }
     }
 

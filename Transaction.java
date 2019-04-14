@@ -14,7 +14,7 @@ public class Transaction{
     }
 
     public Transaction(Date dateTran, double amount, String detail ){
-        tranDate = new Date(dateTran);
+        tranDate = new Date(dateTran.getYear(), dateTran.getMonth(),dateTran.getDay());
         tranAmt = amount;
         description = detail;
     }
@@ -24,7 +24,7 @@ public class Transaction{
     }
 
     public Date getTranDate(){
-        return new Date(tranDate);
+        return new Date(tranDate.getYear(),tranDate.getMonth(), tranDate.getDay());
     }
 
     public String getDescription(){
@@ -32,7 +32,7 @@ public class Transaction{
     }
 
     public void setTranDate(Date dateOfTran){
-        tranDate = new Date(dateOfTran);
+        tranDate = new Date(dateOfTran.getYear(), dateOfTran.getMonth(), dateOfTran.getDay());
     }
 
     public void setTranAmt(double value){
@@ -46,6 +46,6 @@ public class Transaction{
     }
 
     public void setDescription(String details){
-        description = details != NULL? details : "";
+        description = details != null? details : "";
     }
 }
