@@ -27,5 +27,25 @@ public class Transaction{
         return new Date(tranDate);
     }
 
+    public String getDescription(){
+        return description;
+    }
 
+    public void setTranDate(Date dateOfTran){
+        tranDate = new Date(dateOfTran);
+    }
+
+    public void setTranAmt(double value){
+
+        //i dont want anyone else setting the tranAmt
+        // to 0. value of 0 on transaction is reserved
+        //for a dummy transaction object
+        //- value means user credited money
+        //+ vaue means user debited money
+        tranAmt = (value != 0) ? value : 0.00;
+    }
+
+    public void setDescription(String details){
+        description = details != NULL? details : "";
+    }
 }
