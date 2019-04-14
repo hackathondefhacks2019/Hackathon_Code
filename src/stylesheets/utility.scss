@@ -167,3 +167,11 @@ $base-space-unit: 1em;
 .pr-two {
   padding-right: $base-space-unit * 2;
 }
+
+.wrapper {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -36,15 +36,17 @@ class App extends Component {
         const {userSession} = this.state;
         return (
             <div className="App">
-                {
+                <div className="wrapper">
+                {  
                     userSession.isUserSignedIn() ?
-                        <Button color="primary" onClick={this.handleSignOut}>
+                        <Button color="primary is-large" onClick={this.handleSignOut}>
                             Sign out
                         </Button> :
-                        <Button color="primary" onClick={this.handleSignIn}>
+                        <Button color="primary is-large" onClick={this.handleSignIn}>
                             Sign in
                         </Button>
                 }
+                </div>
             </div>
         );
     }
