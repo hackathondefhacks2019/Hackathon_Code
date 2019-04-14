@@ -36,22 +36,21 @@ public class Score {
     public void fullScoreCalculator() {
         double result = 0.0;
         // total score for pastScore
-        result += pastScore * pastScoreCalculator()/100.0;
-        System.out.println(pastScoreCalculator()/100.0);
-        System.out.println();
+        result += pastScoreCalculator() * pastScore;
+        //System.out.println(pastScore);
         // total score for recentScore
         result += recentScore * recentScoreCalculator()/100.0;
-        System.out.println(recentScore);
+        //System.out.println(recentScore);
 
         // total score for nearFutureSore
         result += nearFutureScore * nearFutureScoreCalculator()/100.0;
-        System.out.println(nearFutureScore);
+        //System.out.println(nearFutureScore);
 
         // total score for farFutureScore
         result += farFutureScore * farFutureScoreCalculator()/100.0;
-        System.out.println(farFutureScore);
+        //System.out.println(farFutureScore);
 
-        setScore(result);
+        setScore(result * 0.15);
     }
 
     // past score (all past transactions)
@@ -79,7 +78,6 @@ public class Score {
             int timeSpan = compareDate(currentDate, list.get(i).getDate());
             // multiplier applied
             pastAcum += Math.abs(timeSpan)/30.0 * totalAcum * PASTSCORE_MULTIPLIER_TINKER;
-            //System.out.println(pastAcum);
         }
         pastScore = pastAcum;
 
@@ -107,7 +105,6 @@ public class Score {
             int timeSpan = compareDate(currentDate, list.get(i).getDate());
             // multiplier applied
             recentAcum += Math.abs(timeSpan)/30.0 * totalAcum * RECENTSCORE_MULTIPLIER_TINKER;
-            //System.out.println(recentAcum);
         }
         recentScore = recentAcum;
 
@@ -133,7 +130,7 @@ public class Score {
     public double nearFutureScoreCalculator() {
         double percentage;
         double[] temp = linearTrendLine((list.size()>=20)?20:list.size());
-        this.nearFutureScore = (temp[0]*((list.size()>=10)?20:list.size()))/10.0 + temp[1];
+        this.nearFutureScore = (temp[0]*((list.size()>=10)?20:list.size()))/100.0 + temp[1];
 
         return percentageFinder(nearFutureScore, NEARFUTURE_BASEWEIGHT);
     }
