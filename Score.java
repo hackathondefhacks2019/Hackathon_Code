@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.text.SimpleDateFormat;
-import java.text.DateFormat;
+//import java.text.SimpleDateFormat;
+//import java.text.DateFormat;
 import java.util.Date;
 
 public class Score {
@@ -19,13 +19,15 @@ public class Score {
     private ArrayList<TransactionNode> list;
 
     private final double INITIAL_CREDITSCORE = 70;
-    private final double INITIAL_PASTSCORE = 100;
+    private final double INITIAL_SCORE = 100;
 
     private final double PASTSCORE_BASEWEIGHT = 20.0;
     private final double RECENTSCORE_BASEWEIGHT = 10.0;
+    private final double FARFUTURE_BASEWEIGHT = 20.0;
 
     private final double SCORE_PER_GRADE = 65.0;
     private final double PASTSCORE_MULTIPLIER_TINKER = 0.4;
+    private final double RECENTSCORE_MULTIPLIER_TINKER = 0.4;
 
 
     public Score() throws FileNotFoundException {
@@ -36,10 +38,15 @@ public class Score {
 
     // full score calculator
     public void fullScoreCalculator() {
-        double result;
+        double result = 0.0;
+        // total score for pastScore
+        result += pastScore * pastScoreCalculator()/100.0;
+
         // total score for recentScore
+        result += recentScore * recentScoreCalculator()/100.0;
 
         // total score for nearFutureSore
+
 
         // total score for farFutureScore
 
@@ -72,7 +79,7 @@ public class Score {
             // multiplier applied
             pastAcum += Math.abs(timeSpan) * totalAcum * PASTSCORE_MULTIPLIER_TINKER;
         }
-        pastScore = INITIAL_PASTSCORE - pastAcum;
+        pastScore = INITIAL_SCORE - pastAcum;
 
         // final statements in method
         this.pastScore = pastScore;
@@ -93,38 +100,56 @@ public class Score {
         for (int i = 0; i < 20; i++) {
             totalAcum += list.get(i).getAmount();
 
-            // length of time money was due
             int timeSpan = compareDate(currentDate, list.get(i).getDate());
             // multiplier applied
-            pastAcum += Math.abs(timeSpan) * totalAcum * PASTSCORE_MULTIPLIER_TINKER;
+            recentAcum += Math.abs(timeSpan) * totalAcum * RECENTSCORE_MULTIPLIER_TINKER;
         }
-        pastScore = INITIAL_PASTSCORE - pastAcum;
+        recentScore = INITIAL_SCORE - recentAcum;
 
         // weight according to number of transactions
-        if () percentage = PASTSCORE_BASEWEIGHT;
-        else if () percentage = PASTSCORE_BASEWEIGHT+1.0;
-        else if () percentage = PASTSCORE_BASEWEIGHT+4.0;
-        else if () percentage = PASTSCORE_BASEWEIGHT+6.0;
-        else percentage = PASTSCORE_BASEWEIGHT+8.0;
+        if (recentScore >= 80.0) percentage = RECENTSCORE_BASEWEIGHT+4.0;
+        else if (recentScore >= 70.0) percentage = RECENTSCORE_BASEWEIGHT+2.0;
+        else percentage = RECENTSCORE_BASEWEIGHT;
 
         // final statements in method
-        this.pastScore = pastScore;
+        this.recentScore = recentScore;
         return percentage;
     }
 
     // future score calculator
     public double farFutureScoreCalculator() {
+        double a = 0.0, b1 = 0.0, b2 = 0, c = 0.0, y = 0.0;
+        double slope, yintercept, percentage;
+        int x;
 
+        int initialDate = list.get(0).getDate();
+        for (int i = 0; i < list.size(); i++) {
+            y += list.get(i).getAmount();
+            x = compareDate(initialDate, list.get(i).getDate());
+
+            a += x * y;
+            b1 += x;
+            b2 += y;
+            c += x*x;
+
+        }
+        a *= 3;
+        c *= 3;
+
+        slope = (a - b1*b2) / (c - b1*b1);
+        yintercept = (b2 - slope*b1) / (double)list.size();
+        this.farFutureScore = slope * 30 + yintercept;
+
+        if (farFutureScore <= 80) percentage = FARFUTURE_BASEWEIGHT;
+        else if (farFutureScore <= 100) percentage = FARFUTURE_BASEWEIGHT+1.0;
+        else if (farFutureScore <= 120) percentage = FARFUTURE_BASEWEIGHT+3.0;
+        else percentage = FARFUTURE_BASEWEIGHT+5.0;
+        return percentage;
     }
 
     // near future score calculator
     public double nearFutureScoreCalculator() {
 
-    }
-
-    // score calculator from inputted date
-    public double partialScoreCalculator() {
-        return 0.0;
     }
 
     // artificial compareTo method for two dates
